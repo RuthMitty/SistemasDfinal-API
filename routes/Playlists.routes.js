@@ -1,8 +1,14 @@
 import express from "express";
 import { sPlaylist } from "../controller/playlists.controller.js";
+import { AddPlaylist } from "../controller/playlists.controller.js";
+import { DelPlaylist } from "../controller/playlists.controller.js";
 
-const searchPlaylist= express.Router();
+const Playlist= express.Router();
 
-searchPlaylist.get('/MyPlaylist/:user_id', sPlaylist);
+Playlist.get('/MyPlaylist/:user_id', sPlaylist);
 
-export default searchPlaylist;
+Playlist.post('/AddPlaylist', AddPlaylist);
+
+Playlist.delete('/DeletePlaylist', DelPlaylist);
+
+export default Playlist;
