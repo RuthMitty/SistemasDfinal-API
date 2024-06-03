@@ -21,4 +21,26 @@ export const createUser = async (req, res, next) => {
     return res.status(500).json({ error });
   }
 };
+
+
+//Jalar Los datos del usuario Queremos Su User_id Para con ese poder hacer todo
+
+
+export const SearchUser = async (req, res, next) => {
+  const { auth0_id } = req.body;
+  try {
+    const query = 'SELECT * FROM Users WHERE Auth0_id = ?';
+    const result = await pool.query(query, [auth0_id]);
+    
+    if (result.length > 0) {
+      return res.status(200).json(result[0]);
+    } else {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+  } catch (error) {
+    console.log('Error al buscar el usuario:', error);
+    return res.status(500).json({ error: 'Error al buscar el usuario' });
+  }
+};
+
 //made by Alan T 
